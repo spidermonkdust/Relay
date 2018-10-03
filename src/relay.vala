@@ -99,7 +99,7 @@ public class Relay : Granite.Application {
         Intl.bindtextdomain (Config.GETTEXT_PACKAGE, "./locale");
     }
     
-    public static const GLib.OptionEntry[] app_options = {
+    public const GLib.OptionEntry[] app_options = {
         { "no-theme", 't', 0, OptionArg.NONE, out no_theme, "Disable switching to a different theme", null },
         { null }
     };
