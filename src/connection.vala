@@ -25,7 +25,7 @@ using Gee;
 public class Connection : Object
 {
 
-	public static const uint16 DEFAULT_PORT = 6667;
+	public const uint16 DEFAULT_PORT = 6667;
 	private DataInputStream input_stream;
 	private DataOutputStream output_stream;
 	public ChannelTab server_tab;

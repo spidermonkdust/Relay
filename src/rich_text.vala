@@ -24,7 +24,7 @@ public class RichText : GLib.Object {
     string text;
 
     private static Regex? parse_url;
-    private static const string url_string = """(http|https?|ftp):\/\/[^\s\/$.?#].[^\s]*""";
+    private const string url_string = """(http|https?|ftp):\/\/[^\s\/$.?#].[^\s]*""";
     public LinkedList<int> link_locations_start;
     public LinkedList<int> link_locations_end;
     public LinkedList<int> name_location_start = new LinkedList<int>();
