@@ -1,5 +1,4 @@
 
-/* -*- Mode: vala; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*-  */
 /*
  * message.vala
  * Copyright (C) 2015 Kyle Agronick <stack@kyle-ele>
@@ -39,19 +38,19 @@ public class Message : GLib.Object {
     public Message (string _message = "") {
         if (regex == null) {
             try {
-                regex = new Regex(regex_string, RegexCompileFlags.OPTIMIZE ); 
+                regex = new Regex (regex_string, RegexCompileFlags.OPTIMIZE ); 
             } catch (RegexError e){
-                error("There was a regex error that should never happen");
+                error ("There was a regex error that should never happen");
             }
         }
         if (_message.length == 0)
             return;
-		try{
-			message = _message.validate() ? _message : _message.escape("\b\f\n\r\t\'"); 
-		}catch(RegexError e) {
-			message = _message;
-		}
-        parse_regex();
+        try {
+            message = _message.validate () ? _message : _message.escape ("\b\f\n\r\t\'"); 
+        } catch (RegexError e) {
+            message = _message;
+        }
+        parse_regex ();
     }
 
     public string get_prefix_name () {
@@ -59,52 +58,52 @@ public class Message : GLib.Object {
             return "";
         if (command == IRC.PRIVATE_MESSAGE)
             usr_private_message = true;
-		if (prefix != null)
-    		return prefix.split("!")[0];
-		return "";
+        if (prefix != null)
+            return prefix.split ("!")[0];
+        return "";
     }
 
     public void user_name_set (string? name) { 
-		if (name != null)
-    		user_name = name;
+        if (name != null)
+            user_name = name;
     }
 
     //Use this function to add padding to the user name
     public string user_name_get () {
         string name = user_name;
         if (name.length >= IRC.USER_LENGTH) 
-            name = user_name.substring(0, IRC.USER_LENGTH - 3) + "...";
+            name = user_name.substring (0, IRC.USER_LENGTH - 3) + "...";
         int length = IRC.USER_LENGTH - name.length;
-        return name + string.nfill(length, ' ');
+        return name + string.nfill (length, ' ');
     }
 
-    public string get_msg_txt() {
-        return (message == null) ? "" : message.strip();
+    public string get_msg_txt () {
+        return (message == null) ? "" : message.strip ();
     }
 
     public void parse_regex () {
-        try{
-			if (message == null)
-				return;
-			
+        try {
+            if (message == null)
+                return;
+            
             regex.replace_eval (message, -1, 0, 0, (mi, s) => {
                 prefix = mi.fetch_named ("prefix");
                 command = mi.fetch_named ("command");
-				if (mi.fetch_named ("params") != null)
-            		parameters = mi.fetch_named ("params").split(" ");
+                if (mi.fetch_named ("params") != null)
+                    parameters = mi.fetch_named ("params").split(" ");
                 message = mi.fetch_named ("trail");
 
                 if (message != null)
-                    message = message.replace("\t", "");
-				if (prefix != null) {
-		            if (command in user_cmds)
-		                user_name_set(prefix.split("!")[0]);
-				}
+                    message = message.replace ("\t", "");
+                if (prefix != null) {
+                    if (command in user_cmds)
+                        user_name_set (prefix.split ("!")[0]);
+                }
 
                 return false;
             });
-        }catch (RegexError e){
-            warning("Regex error with " + message);
+        } catch (RegexError e) {
+            warning ("Regex error with " + message);
         }
     }
 }

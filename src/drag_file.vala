@@ -1,4 +1,3 @@
-/* -*- Mode: vala; indent-tabs-mode: nil; c-basic-offset: 4; tab-width: 4 -*-  */
 /*
  * drag_file.vala
  * Copyright (C) 2015 Kyle Agronick <agronick@gmail.com>

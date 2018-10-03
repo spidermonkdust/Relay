@@ -1,4 +1,3 @@
-/* -*- Mode: vala; indent-tabs-mode: nil; c-basic-offset: 4; tab-width: 4 -*-  */
 /*
  * settings.vala
  * Copyright (C) 2015 Kyle Agronick <agronick@gmail.com>
@@ -43,12 +42,12 @@ public class Settings : GLib.Object {
             window.present();
             return true;
         }
-		var builder = new Builder();
+        var builder = new Builder();
         try {
-		    builder.add_from_file(Relay.get_asset_file(MainWindow.UI_FILE_SETTINGS));
-		} catch (Error e){
-			error("Unable to load UI file " + Relay.get_asset_file(MainWindow.UI_FILE_SETTINGS));
-		}
+            builder.add_from_file(Relay.get_asset_file(MainWindow.UI_FILE_SETTINGS));
+        } catch (Error e){
+            error("Unable to load UI file " + Relay.get_asset_file(MainWindow.UI_FILE_SETTINGS));
+        }
         window = builder.get_object ("window") as Gtk.Window;
         
         foreach (string name in switch_names) {
@@ -140,11 +139,11 @@ public class Settings : GLib.Object {
 
 
     public void set_colors_defaults () {
-		colors_defaults["user-self-color"] = Relay.is_light_theme ? "#3B1C73" : "#AE81FF";
-		colors_defaults["user-other-color"] = Relay.is_light_theme ? "#1D6A77" : "#4EC9DE";
-		colors_defaults["message-color"] = Relay.is_light_theme ? "#505050" : "#F8F8F2";
-		colors_defaults["link-color"] = Relay.is_light_theme ? "#0000FF" : "#3D81C4";
-		colors_defaults["timestamp-color"] = Relay.is_light_theme ? "#181818" : "#D5D5D5";	
+        colors_defaults["user-self-color"] = Relay.is_light_theme ? "#3B1C73" : "#AE81FF";
+        colors_defaults["user-other-color"] = Relay.is_light_theme ? "#1D6A77" : "#4EC9DE";
+        colors_defaults["message-color"] = Relay.is_light_theme ? "#505050" : "#F8F8F2";
+        colors_defaults["link-color"] = Relay.is_light_theme ? "#0000FF" : "#3D81C4";
+        colors_defaults["timestamp-color"] = Relay.is_light_theme ? "#181818" : "#D5D5D5";  
     }
 }
 
