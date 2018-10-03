@@ -1,4 +1,3 @@
-/* -*- Mode: vala; indent-tabs-mode: nil; c-basic-offset: 4; tab-width: 4 -*-  */
 /*
  * main-entry.vala
  * Copyright (C) 2015 Kyle Agronick <agronick@gmail.com>
@@ -23,22 +22,22 @@ using Gdk;
 public class MainEntry : Entry {
 
     int last_pos = -1;
-    ArrayList<string> history = new ArrayList<string>();
+    ArrayList<string> history = new ArrayList<string> ();
     
     public MainEntry () {
-        key_press_event.connect(press_event);
-        activate.connect(do_activate);
+        key_press_event.connect (press_event);
+        activate.connect (do_activate);
     }
 
     public bool press_event (EventKey event) { 
-        string? keyval = Gdk.keyval_name(event.keyval);
+        string? keyval = Gdk.keyval_name (event.keyval);
         switch (keyval) {
             case "Up":
-                up_arrow();
+                up_arrow ();
                 return true;
             break;
             case "Down":
-                down_arrow();
+                down_arrow ();
             break;
         }
         return false;
@@ -51,35 +50,34 @@ public class MainEntry : Entry {
             return;
         else
             last_pos--;
-        
     
-        write_history(last_pos);
+        write_history (last_pos);
     }
 
     private void down_arrow () {
         if (history.size > last_pos + 1)
             last_pos++;
         else {
-            set_text("");
+            set_text ("");
             return;
         }
 
-        write_history(last_pos);
+        write_history (last_pos);
     }
 
     private void write_history (int index) {
         if (index > history.size || index < 0)
             return;
         
-        set_text(history[index]);
-        set_position(get_text().length);
+        set_text (history[index]);
+        set_position (get_text ().length);
     }
 
     public void do_activate () {
-        if (get_text().strip() == "")
+        if (get_text ().strip () == "")
             return;
         
-        history.add(get_text());
+        history.add (get_text ());
         last_pos = -1;
     }
 }
