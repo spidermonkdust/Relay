@@ -126,7 +126,7 @@ public class MainWindow : Object {
             
             var serv_chan_menuitem = new Gtk.MenuItem.with_label (_("Toggle Server/Channel View"));
             serv_chan_menuitem.activate.connect (toggleServChanPanel);
-            
+
             var pref_menuitem = new Gtk.MenuItem.with_label (_("Preferences"));
             pref_menuitem.activate.connect (editPreferencesClick);
             
@@ -1049,7 +1049,7 @@ public class MainWindow : Object {
     private void toggleServChanPanel () {
         slide_panel ();
     }
-    
+
     private void editPreferencesClick () {
         settings.show_window ();
     }
