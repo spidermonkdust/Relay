@@ -124,10 +124,15 @@ public class MainWindow : Object {
             select_channel.button_release_event.connect(slide_panel);
             panel.position = 1;
             
+            var serv_chan_menuitem = new Gtk.MenuItem.with_label (_("Toggle Server/Channel View"));
+            serv_chan_menuitem.activate.connect (toggleServChanPanel);
+
             var pref_menuitem = new Gtk.MenuItem.with_label (_("Preferences"));
             pref_menuitem.activate.connect (editPreferencesClick);
             
             var pref_menu = new Gtk.Menu ();
+            pref_menu.append (serv_chan_menuitem);
+            pref_menu.append (new Gtk.SeparatorMenuItem ());
             pref_menu.append (pref_menuitem);
             pref_menu.show_all ();
             
@@ -1041,6 +1046,10 @@ public class MainWindow : Object {
             }
     }
     
+    private void toggleServChanPanel () {
+        slide_panel ();
+    }
+
     private void editPreferencesClick () {
         settings.show_window ();
     }
