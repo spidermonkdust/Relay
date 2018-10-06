@@ -124,11 +124,19 @@ public class MainWindow : Object {
             select_channel.button_release_event.connect(slide_panel);
             panel.position = 1;
             
-            Button settings_btn = new Gtk.Button ();
-            settings_btn.image = new Gtk.Image.from_icon_name ("open-menu", Gtk.IconSize.LARGE_TOOLBAR);
-            settings_btn.tooltip_text = _("Settings");
-            toolbar.pack_end (settings_btn);
-            settings_btn.button_release_event.connect(settings.show_window);
+            var pref_menuitem = new Gtk.MenuItem.with_label (_("Preferences"));
+            pref_menuitem.activate.connect (editPreferencesClick);
+            
+            var pref_menu = new Gtk.Menu ();
+            pref_menu.append (pref_menuitem);
+            pref_menu.show_all ();
+            
+            var pref_menu_button = new Gtk.MenuButton ();
+            pref_menu_button.image = new Gtk.Image.from_icon_name ("open-menu", Gtk.IconSize.LARGE_TOOLBAR);
+            pref_menu_button.popup = pref_menu;
+            pref_menu_button.valign = Gtk.Align.CENTER;
+            
+            toolbar.pack_end (pref_menu_button);
             settings.changed_color.connect(tags_refresh);
             settings.show_hide_tabs.connect( (state)=> {
                 tabs.show_tabs = state;
@@ -1031,6 +1039,10 @@ public class MainWindow : Object {
             }else {
                 chooser.close ();
             }
+    }
+    
+    private void editPreferencesClick () {
+        settings.show_window ();
     }
 
     public void relay_close_program () { 
