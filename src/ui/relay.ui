@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.18.3 -->
+<!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.1"/>
-  <object class="GtkImage" id="image1">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-properties</property>
-  </object>
   <object class="GtkWindow" id="window">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -17,6 +12,9 @@
     <property name="icon">relay.svg</property>
     <property name="gravity">center</property>
     <property name="has_resize_grip">True</property>
+    <child>
+      <placeholder/>
+    </child>
     <child>
       <object class="GtkPaned" id="panel">
         <property name="visible">True</property>
@@ -88,19 +86,7 @@
                   <placeholder/>
                 </child>
                 <child>
-                  <object class="GtkButton" id="settings_btn">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="vexpand">False</property>
-                    <property name="image">image1</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="pack_type">end</property>
-                    <property name="position">1</property>
-                  </packing>
+                  <placeholder/>
                 </child>
               </object>
               <packing>
