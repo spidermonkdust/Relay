@@ -85,13 +85,6 @@ public class MainWindow : Object {
             builder.add_from_file (Relay.get_asset_file(UI_FILE));
             builder.connect_signals(this);
 
-            var settings_btn = builder.get_object("settings_btn") as Button;
-            settings_btn.button_release_event.connect(settings.show_window);
-            settings.changed_color.connect(tags_refresh);
-            settings.show_hide_tabs.connect( (state)=> {
-                tabs.show_tabs = state;
-            });
-
             if (Relay.on_kde)
                 toolbar.decoration_layout = "";
             else if (Relay.on_ubuntu)
@@ -130,6 +123,16 @@ public class MainWindow : Object {
             toolbar.pack_start(select_channel);
             select_channel.button_release_event.connect(slide_panel);
             panel.position = 1;
+            
+            Button settings_btn = new Gtk.Button ();
+            settings_btn.image = new Gtk.Image.from_icon_name ("open-menu", Gtk.IconSize.LARGE_TOOLBAR);
+            settings_btn.tooltip_text = _("Settings");
+            toolbar.pack_end (settings_btn);
+            settings_btn.button_release_event.connect(settings.show_window);
+            settings.changed_color.connect(tags_refresh);
+            settings.show_hide_tabs.connect( (state)=> {
+                tabs.show_tabs = state;
+            });
 
             Box entry_wrapper = builder.get_object("entry_wrapper") as Box;
             input = new MainEntry();
